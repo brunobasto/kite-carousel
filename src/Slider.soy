@@ -1,0 +1,57 @@
+{namespace Templates.Slider}
+
+/**
+ * This renders the main element
+ * @param id
+ * @param items
+ */
+{template .content}
+	<div id="{$id}" class="carousel slide" data-ride="carousel">
+		{call .indicators data="all" /}
+		{call .items data="all" /}
+		{call .controls data="all" /}
+	</div>
+{/template}
+
+/**
+ * Carousel Controls
+ */
+{template .controls}
+	<a class="left carousel-control" href="javascript:;" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="right carousel-control" href="javascript:;" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+{/template}
+/**
+ * @param items
+ */
+{template .indicators}
+	<ol class="carousel-indicators">
+		{foreach $item in $items}
+			<li {if isFirst($item)}class="active"{/if} data-slide-to="{index($item)}"></li>
+		{/foreach}
+	</ul>
+{/template}
+
+/**
+ * @param items
+ */
+{template .items}
+	<div class="carousel-inner" role="listbox">
+
+	{foreach $item in $items}
+		<div class="item {if isFirst($item)}active{/if}">
+			<img src="{$item.src}" alt="{$item.title}">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>{$item.headline}</h1>
+					<p>{$item.body}</p>
+				</div>
+			</div>
+		</div>
+	{/foreach}
+{/template}

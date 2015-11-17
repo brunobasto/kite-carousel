@@ -1,0 +1,24 @@
+{
+	"name": "kite-slider",
+	"version": "0.0.0",
+	"description": "Kite's slider component",
+	"main": "src/Slider.js",
+	"moduleType": [
+		"es6"
+	],
+	"keywords": [
+		"metal",
+		"kite"
+	],
+	"ignore": [
+		"*",
+		"!src/**/*",
+		"!test/**/*"
+	],
+	"dependencies": {
+		"metal": "metal/metal.js#master",
+		"metal-anim": "metal/metal-anim#master",
+		"metal-jquery-adapter": "metal/metal-jquery-adapter#master",
+		"steel-bootstrap": "metal/steel-bootstrap#master"
+	}
+}
