@@ -377,6 +377,130 @@ this.kiteNamed = this.kiteNamed || {};
 (function () {
 	var core = this.kite.core;
 
+	var array = (function () {
+		function array() {
+			babelHelpers.classCallCheck(this, array);
+		}
+
+		babelHelpers.createClass(array, null, [{
+			key: 'equal',
+
+			/**
+    * Checks if the given arrays have the same content.
+    * @param {!Array<*>} arr1
+    * @param {!Array<*>} arr2
+    * @return {boolean}
+    */
+			value: function equal(arr1, arr2) {
+				for (var i = 0; i < arr1.length; i++) {
+					if (arr1[i] !== arr2[i]) {
+						return false;
+					}
+				}
+				return arr1.length === arr2.length;
+			}
+
+			/**
+    * Returns the first value in the given array that isn't undefined.
+    * @param {!Array} arr
+    * @return {*}
+    */
+
+		}, {
+			key: 'firstDefinedValue',
+			value: function firstDefinedValue(arr) {
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i] !== undefined) {
+						return arr[i];
+					}
+				}
+			}
+
+			/**
+    * Transforms the input nested array to become flat.
+    * @param {Array.<*|Array.<*>>} arr Nested array to flatten.
+    * @param {Array.<*>} opt_output Optional output array.
+    * @return {Array.<*>} Flat array.
+    */
+
+		}, {
+			key: 'flatten',
+			value: function flatten(arr, opt_output) {
+				var output = opt_output || [];
+				for (var i = 0; i < arr.length; i++) {
+					if (Array.isArray(arr[i])) {
+						array.flatten(arr[i], output);
+					} else {
+						output.push(arr[i]);
+					}
+				}
+				return output;
+			}
+
+			/**
+    * Removes the first occurrence of a particular value from an array.
+    * @param {Array.<T>} arr Array from which to remove value.
+    * @param {T} obj Object to remove.
+    * @return {boolean} True if an element was removed.
+    * @template T
+    */
+
+		}, {
+			key: 'remove',
+			value: function remove(arr, obj) {
+				var i = arr.indexOf(obj);
+				var rv;
+				if (rv = i >= 0) {
+					array.removeAt(arr, i);
+				}
+				return rv;
+			}
+
+			/**
+    * Removes from an array the element at index i
+    * @param {Array} arr Array or array like object from which to remove value.
+    * @param {number} i The index to remove.
+    * @return {boolean} True if an element was removed.
+    */
+
+		}, {
+			key: 'removeAt',
+			value: function removeAt(arr, i) {
+				return Array.prototype.splice.call(arr, i, 1).length === 1;
+			}
+
+			/**
+    * Slices the given array, just like Array.prototype.slice, but this
+    * is faster and working on all array-like objects (like arguments).
+    * @param {!Object} arr Array-like object to slice.
+    * @param {number} start The index that should start the slice.
+    * @param {number=} opt_end The index where the slice should end, not
+    *   included in the final array. If not given, all elements after the
+    *   start index will be included.
+    * @return {!Array}
+    */
+
+		}, {
+			key: 'slice',
+			value: function slice(arr, start, opt_end) {
+				var sliced = [];
+				var end = core.isDef(opt_end) ? opt_end : arr.length;
+				for (var i = start; i < end; i++) {
+					sliced.push(arr[i]);
+				}
+				return sliced;
+			}
+		}]);
+		return array;
+	})();
+
+	this.kite.array = array;
+}).call(this);
+'use strict';
+
+(function () {
+	var core = this.kite.core;
+
 	var object = (function () {
 		function object() {
 			babelHelpers.classCallCheck(this, object);
@@ -1266,130 +1390,6 @@ this.kiteNamed = this.kiteNamed || {};
 	dom.customEvents = {};
 
 	this.kite.dom = dom;
-}).call(this);
-'use strict';
-
-(function () {
-	var core = this.kite.core;
-
-	var array = (function () {
-		function array() {
-			babelHelpers.classCallCheck(this, array);
-		}
-
-		babelHelpers.createClass(array, null, [{
-			key: 'equal',
-
-			/**
-    * Checks if the given arrays have the same content.
-    * @param {!Array<*>} arr1
-    * @param {!Array<*>} arr2
-    * @return {boolean}
-    */
-			value: function equal(arr1, arr2) {
-				for (var i = 0; i < arr1.length; i++) {
-					if (arr1[i] !== arr2[i]) {
-						return false;
-					}
-				}
-				return arr1.length === arr2.length;
-			}
-
-			/**
-    * Returns the first value in the given array that isn't undefined.
-    * @param {!Array} arr
-    * @return {*}
-    */
-
-		}, {
-			key: 'firstDefinedValue',
-			value: function firstDefinedValue(arr) {
-				for (var i = 0; i < arr.length; i++) {
-					if (arr[i] !== undefined) {
-						return arr[i];
-					}
-				}
-			}
-
-			/**
-    * Transforms the input nested array to become flat.
-    * @param {Array.<*|Array.<*>>} arr Nested array to flatten.
-    * @param {Array.<*>} opt_output Optional output array.
-    * @return {Array.<*>} Flat array.
-    */
-
-		}, {
-			key: 'flatten',
-			value: function flatten(arr, opt_output) {
-				var output = opt_output || [];
-				for (var i = 0; i < arr.length; i++) {
-					if (Array.isArray(arr[i])) {
-						array.flatten(arr[i], output);
-					} else {
-						output.push(arr[i]);
-					}
-				}
-				return output;
-			}
-
-			/**
-    * Removes the first occurrence of a particular value from an array.
-    * @param {Array.<T>} arr Array from which to remove value.
-    * @param {T} obj Object to remove.
-    * @return {boolean} True if an element was removed.
-    * @template T
-    */
-
-		}, {
-			key: 'remove',
-			value: function remove(arr, obj) {
-				var i = arr.indexOf(obj);
-				var rv;
-				if (rv = i >= 0) {
-					array.removeAt(arr, i);
-				}
-				return rv;
-			}
-
-			/**
-    * Removes from an array the element at index i
-    * @param {Array} arr Array or array like object from which to remove value.
-    * @param {number} i The index to remove.
-    * @return {boolean} True if an element was removed.
-    */
-
-		}, {
-			key: 'removeAt',
-			value: function removeAt(arr, i) {
-				return Array.prototype.splice.call(arr, i, 1).length === 1;
-			}
-
-			/**
-    * Slices the given array, just like Array.prototype.slice, but this
-    * is faster and working on all array-like objects (like arguments).
-    * @param {!Object} arr Array-like object to slice.
-    * @param {number} start The index that should start the slice.
-    * @param {number=} opt_end The index where the slice should end, not
-    *   included in the final array. If not given, all elements after the
-    *   start index will be included.
-    * @return {!Array}
-    */
-
-		}, {
-			key: 'slice',
-			value: function slice(arr, start, opt_end) {
-				var sliced = [];
-				var end = core.isDef(opt_end) ? opt_end : arr.length;
-				for (var i = start; i < end; i++) {
-					sliced.push(arr[i]);
-				}
-				return sliced;
-			}
-		}]);
-		return array;
-	})();
-
-	this.kite.array = array;
 }).call(this);
 'use strict';
 
@@ -6667,164 +6667,8 @@ this.kiteNamed = this.kiteNamed || {};
 'use strict';
 
 (function () {
-	var dom = this.kite.dom;
-	var features = this.kite.features;
-
-	var mouseEventMap = {
-		mouseenter: 'mouseover',
-		mouseleave: 'mouseout',
-		pointerenter: 'pointerover',
-		pointerleave: 'pointerout'
-	};
-	Object.keys(mouseEventMap).forEach(function (eventName) {
-		dom.registerCustomEvent(eventName, {
-			delegate: true,
-			handler: function handler(callback, event) {
-				var related = event.relatedTarget;
-				var target = event.delegateTarget;
-				if (!related || related !== target && !target.contains(related)) {
-					event.customType = eventName;
-					return callback(event);
-				}
-			},
-			originalEvent: mouseEventMap[eventName]
-		});
-	});
-
-	var animationEventMap = {
-		animation: 'animationend',
-		transition: 'transitionend'
-	};
-	Object.keys(animationEventMap).forEach(function (eventType) {
-		var eventName = animationEventMap[eventType];
-		dom.registerCustomEvent(eventName, {
-			event: true,
-			delegate: true,
-			handler: function handler(callback, event) {
-				event.customType = eventName;
-				return callback(event);
-			},
-			originalEvent: features.checkAnimationEventName()[eventType]
-		});
-	});
-}).call(this);
-'use strict';
-
-(function () {
 	var core = this.kite.core;
-	var dom = this.kite.dom;
-	var features = this.kite.features;
-
-	var Anim = (function () {
-		function Anim() {
-			babelHelpers.classCallCheck(this, Anim);
-		}
-
-		babelHelpers.createClass(Anim, null, [{
-			key: 'emulateEnd',
-
-			/**
-    * Emulates animation or transition end event, the end event with longer
-    * duration will be used by the emulation. If they have the same value,
-    * transitionend will be emulated.
-    * @param {!Element} element
-    * @param {number=} opt_durationMs
-    * @return {!Object} Object containing `abort` function.
-    */
-			value: function emulateEnd(element, opt_durationMs) {
-				if (this.getComputedDurationMs(element, 'animation') > this.getComputedDurationMs(element, 'transition')) {
-					return this.emulateEnd_(element, 'animation', opt_durationMs);
-				} else {
-					return this.emulateEnd_(element, 'transition', opt_durationMs);
-				}
-			}
-
-			/**
-    * Emulates animation end event. If `opt_durationMs` not specified the value
-    * will read from computed style for animation-duration.
-    * @param {!Element} element
-    * @param {number=} opt_durationMs
-    * @return {!Object} Object containing `abort` function.
-    */
-
-		}, {
-			key: 'emulateAnimationEnd',
-			value: function emulateAnimationEnd(element, opt_durationMs) {
-				return this.emulateEnd_(element, 'animation', opt_durationMs);
-			}
-
-			/**
-    * Emulates transition end event. If `opt_durationMs` not specified the
-    * value will read from computed style for transition-duration.
-    * @param {!Element} element
-    * @param {number=} opt_durationMs
-    * @return {!Object} Object containing `abort` function.
-    */
-
-		}, {
-			key: 'emulateTransitionEnd',
-			value: function emulateTransitionEnd(element, opt_durationMs) {
-				this.emulateEnd_(element, 'transition', opt_durationMs);
-			}
-
-			/**
-    * Emulates transition or animation end.
-    * @param {!Element} element
-    * @param {string} type
-    * @param {number=} opt_durationMs
-    * @return {!Object} Object containing `abort` function.
-    * @protected
-    */
-
-		}, {
-			key: 'emulateEnd_',
-			value: function emulateEnd_(element, type, opt_durationMs) {
-				var duration = opt_durationMs;
-				if (!core.isDef(opt_durationMs)) {
-					duration = this.getComputedDurationMs(element, type);
-				}
-
-				var delayed = setTimeout(function () {
-					dom.triggerEvent(element, features.checkAnimationEventName()[type]);
-				}, duration);
-
-				var abort = function abort() {
-					clearTimeout(delayed);
-					hoistedEvtHandler.removeListener();
-				};
-				var hoistedEvtHandler = dom.once(element, type + 'end', abort);
-
-				return {
-					abort: abort
-				};
-			}
-
-			/**
-    * Gets computed style duration for duration.
-    * @param {!Element} element
-    * @param {string} type
-    * @return {number} The computed duration in milliseconds.
-    */
-
-		}, {
-			key: 'getComputedDurationMs',
-			value: function getComputedDurationMs(element, type) {
-				return (parseFloat(window.getComputedStyle(element, null).getPropertyValue(type + '-duration')) || 0) * 1000;
-			}
-		}]);
-		return Anim;
-	})();
-
-	this.kite.Anim = Anim;
-}).call(this);
-'use strict';
-
-(function () {
-	var core = this.kite.core;
-	var dom = this.kite.dom;
 	var CarouselBase = this.kite.Carousel;
-	var Anim = this.kite.Anim;
-	var EventHandler = this.kite.EventHandler;
 
 	/**
   * Carousel component.
@@ -6833,17 +6677,31 @@ this.kiteNamed = this.kiteNamed || {};
 	var Carousel = (function (_CarouselBase) {
 		babelHelpers.inherits(Carousel, _CarouselBase);
 
-		function Carousel() {
+		function Carousel(opt_config) {
 			babelHelpers.classCallCheck(this, Carousel);
-			return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Carousel).apply(this, arguments));
+
+			var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Carousel).call(this, opt_config));
+
+			_this.on('selectedIndexChanged', _this._onSelectedIndexChanged);
+			return _this;
 		}
 
+		/**
+   * @inheritDoc
+   */
+
 		babelHelpers.createClass(Carousel, [{
-			key: 'navigate',
+			key: 'attached',
+			value: function attached() {
+				this._resetInterval();
+			}
 
 			/**
     * Navigates to the desired slide.
     */
+
+		}, {
+			key: 'navigate',
 			value: function navigate(index) {
 				this.selectedIndex = index;
 			}
@@ -6891,6 +6749,20 @@ this.kiteNamed = this.kiteNamed || {};
 
 				this.navigate(index);
 			}
+		}, {
+			key: '_onSelectedIndexChanged',
+			value: function _onSelectedIndexChanged(event) {
+				this._resetInterval();
+			}
+		}, {
+			key: '_resetInterval',
+			value: function _resetInterval() {
+				if (this.autoScroll) {
+					clearInterval(this.interval);
+
+					this.interval = setInterval(this.next.bind(this), this.delay);
+				}
+			}
 		}]);
 		return Carousel;
 	})(CarouselBase);
@@ -6911,12 +6783,30 @@ this.kiteNamed = this.kiteNamed || {};
   */
 	Carousel.ATTRS = {
 		/**
+   * Periodically scroll between carousel items.
+   * @type {boolean}
+   */
+		autoScroll: {
+			validator: core.isBoolean,
+			value: true
+		},
+
+		/**
    * If the carousel round-robins.
    * @type {boolean}
    */
 		circular: {
 			validator: core.isBoolean,
 			value: true
+		},
+
+		/**
+   * Time in miliseconds between automatic transitions.
+   * @type {boolean}
+   */
+		delay: {
+			validator: core.isNumber,
+			value: 3000
 		},
 
 		/**
@@ -6946,7 +6836,7 @@ this.kiteNamed = this.kiteNamed || {};
 		},
 
 		/**
-   * The currently selected index.
+   * The currently selected item index.
    * @type {Number}
    */
 		selectedIndex: {
