@@ -66,7 +66,7 @@ Carousel.ATTRS = {
 	 */
 	height: {
 		validator: core.isString,
-		value: '600px'
+		value: 'auto'
 	},
 
 	/**
