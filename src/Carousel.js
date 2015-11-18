@@ -1,16 +1,25 @@
 'use strict';
 
 import core from 'bower:metal/src/core';
-import dom from 'bower:metal/src/dom/dom';
 import CarouselBase from './Carousel.soy.js';
-import Anim from 'bower:metal-anim/src/Anim';
-import EventHandler from 'bower:metal/src/events/EventHandler';
-import 'bower:metal/src/dom/events';
 
 /**
  * Carousel component.
  */
 class Carousel extends CarouselBase {
+	constructor(opt_config) {
+		super(opt_config);
+
+		this.on('selectedIndexChanged', this._onSelectedIndexChanged);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	attached() {
+		this._resetInterval();
+	}
+
 	/**
 	 * Navigates to the desired slide.
 	 */
@@ -56,6 +65,18 @@ class Carousel extends CarouselBase {
 
 		this.navigate(index);
 	}
+
+	_onSelectedIndexChanged(event) {
+		this._resetInterval();
+	}
+
+	_resetInterval() {
+		if (this.autoScroll) {
+			clearInterval(this.interval);
+
+			this.interval = setInterval(this.next.bind(this), this.delay);
+		}
+	}
 }
 
 /**
@@ -73,12 +94,30 @@ Carousel.ELEMENT_CLASSES = 'carousel';
  */
 Carousel.ATTRS = {
 	/**
+	 * Periodically scroll between carousel items.
+	 * @type {boolean}
+	 */
+	autoScroll: {
+		validator: core.isBoolean,
+		value: true
+	},
+
+	/**
 	 * If the carousel round-robins.
 	 * @type {boolean}
 	 */
 	circular: {
 		validator: core.isBoolean,
 		value: true
+	},
+
+	/**
+	 * Time in miliseconds between automatic transitions.
+	 * @type {boolean}
+	 */
+	delay: {
+		validator: core.isNumber,
+		value: 3000
 	},
 
 	/**
@@ -111,7 +150,7 @@ Carousel.ATTRS = {
 	},
 
 	/**
-	 * The currently selected index.
+	 * The currently selected item index.
 	 * @type {Number}
 	 */
 	selectedIndex: {

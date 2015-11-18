@@ -37,8 +37,18 @@
 }
 
 .carousel-inner > .item {
-	min-height: 300px;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	min-height: 300px;
+}
+
+.carousel-indicators li {
+	margin: 0 4px -1px;
+}
+
+.carousel-indicators .active {
+	height: 15px;
+	margin-bottom: -3px;
+	width: 15px;
 }
