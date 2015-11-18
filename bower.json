@@ -1,6 +1,6 @@
 {
 	"name": "kite-carousel",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Kite's carousel component",
 	"main": "src/Carousel.js",
 	"moduleType": [
@@ -12,6 +12,7 @@
 	],
 	"ignore": [
 		"*",
+		"!build/**/*",
 		"!src/**/*",
 		"!test/**/*"
 	],
