@@ -1,25 +1,23 @@
 {
-	"name": "kite-carousel",
-	"version": "1.0.4",
-	"description": "Kite's carousel component",
-	"main": "src/Carousel.js",
-	"moduleType": [
-		"es6"
-	],
-	"keywords": [
-		"metal",
-		"kite"
-	],
-	"ignore": [
-		"*",
-		"!build/**/*",
-		"!src/**/*",
-		"!test/**/*"
-	],
-	"dependencies": {
-		"metal": "metal/metal.js#master",
-		"metal-anim": "metal/metal-anim#master",
-		"metal-jquery-adapter": "metal/metal-jquery-adapter#master",
-		"steel-bootstrap": "metal/steel-bootstrap#master"
-	}
+  "name": "kite-carousel",
+  "version": "1.0.4",
+  "description": "Kite's carousel component",
+  "main": "src/Carousel.js",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "metal",
+    "kite"
+  ],
+  "ignore": [
+    "*",
+    "!build/**/*",
+    "!src/**/*",
+    "!test/**/*"
+  ],
+  "dependencies": {
+    "metal": "metal/metal.js#master",
+    "bootstrap": "~3.3.5"
+  }
 }
