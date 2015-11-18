@@ -61,6 +61,15 @@ Carousel.ELEMENT_CLASSES = 'carousel';
  */
 Carousel.ATTRS = {
 	/**
+	 * The height of the carousel.
+	 * @type {Number}
+	 */
+	height: {
+		validator: core.isString,
+		value: '600px'
+	},
+
+	/**
 	 * The items shown on the carousel.
 	 * @type {Array}
 	 */

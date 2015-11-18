@@ -36,7 +36,8 @@
 	100% { left: 5%; }
 }
 
-.carousel-inner > .item > img {
-	height: 580px;
-	margin: 0 auto;
+.carousel-inner > .item {
+	min-height: 300px;
+	background-position: center;
+	background-repeat: no-repeat;
 }

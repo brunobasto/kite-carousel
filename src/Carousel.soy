@@ -2,6 +2,7 @@
 
 /**
  * This renders the main element
+ * @param height
  * @param id
  * @param items
  * @param selectedIndex
@@ -40,15 +41,14 @@
 {/template}
 
 /**
+ * @param height
  * @param items
  * @param selectedIndex
  */
 {template .items}
 	<div class="carousel-inner" role="listbox">
 		{foreach $item in $items}
-			<div class="{if index($item) == $selectedIndex}active{/if} item item-{index($item)}">
-				<img src="{$item.src}" alt="{$item.headline}">
-
+			<div class="{if index($item) == $selectedIndex}active{/if} item item-{index($item)}" style="background-image: url({$item.src}); height: {$height};">
 				<div class="carousel-caption">
 					<h1 class="headline">{$item.headline}</h1>
 					<p class="body">{$item.body}</p>

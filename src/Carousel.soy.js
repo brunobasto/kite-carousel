@@ -81,7 +81,7 @@ Templates.Carousel.items = function(opt_data, opt_ignored, opt_ijData) {
   var itemListLen24 = itemList24.length;
   for (var itemIndex24 = 0; itemIndex24 < itemListLen24; itemIndex24++) {
     var itemData24 = itemList24[itemIndex24];
-    output += '<div class="' + ((itemIndex24 == opt_data.selectedIndex) ? 'active' : '') + ' item item-' + soy.$$escapeHtmlAttribute(itemIndex24) + '"><img src="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData24.src)) + '" alt="' + soy.$$escapeHtmlAttribute(itemData24.headline) + '"><div class="carousel-caption"><h1 class="headline">' + soy.$$escapeHtml(itemData24.headline) + '</h1><p class="body">' + soy.$$escapeHtml(itemData24.body) + '</p></div></div>';
+    output += '<div class="' + ((itemIndex24 == opt_data.selectedIndex) ? 'active' : '') + ' item item-' + soy.$$escapeHtmlAttribute(itemIndex24) + '" style="background-image: url(' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData24.src)) + '); height: ' + soy.$$escapeHtmlAttribute(soy.$$filterCssValue(opt_data.height)) + ';"><div class="carousel-caption"><h1 class="headline">' + soy.$$escapeHtml(itemData24.headline) + '</h1><p class="body">' + soy.$$escapeHtml(itemData24.body) + '</p></div></div>';
   }
   output += '</div>';
   return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
@@ -90,10 +90,10 @@ if (goog.DEBUG) {
   Templates.Carousel.items.soyTemplateName = 'Templates.Carousel.items';
 }
 
-Templates.Carousel.content.params = ["id","items","selectedIndex"];
+Templates.Carousel.content.params = ["height","id","items","selectedIndex"];
 Templates.Carousel.controls.params = [];
 Templates.Carousel.indicators.params = ["items","selectedIndex"];
-Templates.Carousel.items.params = ["items","selectedIndex"];
+Templates.Carousel.items.params = ["height","items","selectedIndex"];
 
 class Carousel extends Component {
   static setImpl(ctor) {
