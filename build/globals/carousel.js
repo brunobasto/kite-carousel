@@ -6855,7 +6855,13 @@ this.kiteNamed = this.kiteNamed || {};
 		}, {
 			key: 'next',
 			value: function next() {
-				this.selectedIndex = Math.min(this.selectedIndex + 1, this.items.length - 1);
+				var maxIndex = this.items.length - 1;
+
+				if (this.circular && this.selectedIndex === maxIndex) {
+					this.selectedIndex = 0;
+				} else {
+					this.selectedIndex = Math.min(this.selectedIndex + 1, maxIndex);
+				}
 			}
 
 			/**
@@ -6865,7 +6871,11 @@ this.kiteNamed = this.kiteNamed || {};
 		}, {
 			key: 'prev',
 			value: function prev() {
-				this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+				if (this.circular && this.selectedIndex === 0) {
+					this.selectedIndex = this.items.length - 1;
+				} else {
+					this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+				}
 			}
 		}, {
 			key: '_onClickIndicator',
@@ -6901,8 +6911,17 @@ this.kiteNamed = this.kiteNamed || {};
   */
 	Carousel.ATTRS = {
 		/**
+   * If the carousel round-robins.
+   * @type {boolean}
+   */
+		circular: {
+			validator: core.isBoolean,
+			value: true
+		},
+
+		/**
    * The height of the carousel.
-   * @type {Number}
+   * @type {string}
    */
 		height: {
 			validator: core.isString,
