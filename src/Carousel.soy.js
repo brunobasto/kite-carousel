@@ -81,7 +81,7 @@ Templates.Carousel.items = function(opt_data, opt_ignored, opt_ijData) {
   var itemListLen24 = itemList24.length;
   for (var itemIndex24 = 0; itemIndex24 < itemListLen24; itemIndex24++) {
     var itemData24 = itemList24[itemIndex24];
-    output += '<div class="' + ((itemIndex24 == opt_data.selectedIndex) ? 'active' : '') + ' item item-index($item)"><img src="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData24.src)) + '" alt="' + soy.$$escapeHtmlAttribute(itemData24.headline) + '"><div class="container"><div class="carousel-caption"><h1>' + soy.$$escapeHtml(itemData24.headline) + '</h1><p>' + soy.$$escapeHtml(itemData24.body) + '</p></div></div></div>';
+    output += '<div class="' + ((itemIndex24 == opt_data.selectedIndex) ? 'active' : '') + ' item item-' + soy.$$escapeHtmlAttribute(itemIndex24) + '"><img src="' + soy.$$escapeHtmlAttribute(soy.$$filterNormalizeUri(itemData24.src)) + '" alt="' + soy.$$escapeHtmlAttribute(itemData24.headline) + '"><div class="carousel-caption"><h1 class="headline">' + soy.$$escapeHtml(itemData24.headline) + '</h1><p class="body">' + soy.$$escapeHtml(itemData24.body) + '</p></div></div>';
   }
   output += '</div>';
   return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
