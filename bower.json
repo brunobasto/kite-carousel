@@ -1,7 +1,7 @@
 {
-	"name": "kite-slider",
+	"name": "kite-carousel",
 	"version": "0.0.0",
-	"description": "Kite's slider component",
+	"description": "Kite's carousel component",
 	"main": "src/Slider.js",
 	"moduleType": [
 		"es6"

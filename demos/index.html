@@ -2,18 +2,30 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Demo: Slider</title>
+	<title>Demo: Carousel</title>
 
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
-	<link rel="stylesheet" href="../build/slider.css">
 
 	<script src="../bower_components/soyutils/soyutils.js"></script>
-	<script src="../build/globals/slider.js"></script>
+	<script src="../build/globals/carousel.js"></script>
+
+	<style type="text/css">
+		#myCarousel {
+			margin: 0 auto;
+			width: 900px;
+		}
+
+		.carousel-inner > .item > img {
+			height: 580px;
+			margin: 0 auto;
+		}
+	</style>
 </head>
 <body>
-	<h1>Slider</h1>
+	<h1>Carousel</h1>
 	<script type="text/javascript">
-		new kite.Slider({
+		new kite.Carousel({
+			id: 'myCarousel',
 			visible: true,
 			body: 'Danger'
 		}).render();

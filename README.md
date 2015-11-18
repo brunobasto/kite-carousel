@@ -1,6 +1,6 @@
-# kite-slider
+# kite-carousel
 
-Kite's slider component
+Kite's carousel component
 
 ## Setup
 

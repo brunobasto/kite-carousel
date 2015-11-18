@@ -1,9 +1,9 @@
 {
-	"name": "kite-slider",
+	"name": "kite-carousel",
 	"version": "0.0.0",
-	"description": "Kite's slider component",
+	"description": "Kite's carousel component",
 	"license": "MIT",
-	"repository": "metal/kite-slider",
+	"repository": "brunobasto/kite-carousel",
 	"engines": {
 		"node": ">=0.12.0"
 	},

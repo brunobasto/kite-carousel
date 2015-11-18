@@ -3,9 +3,9 @@
 var metal = require('gulp-metal');
 
 metal.registerTasks({
-	bundleCssFileName: 'slider.css',
-	bundleFileName: 'slider.js',
+	bundleCssFileName: 'carousel.css',
+	bundleFileName: 'carousel.js',
 	globalName: 'kite',
 	mainBuildJsTasks: ['build:globals'],
-	moduleName: 'kite-slider'
+	moduleName: 'kite-carousel'
 });
